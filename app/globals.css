@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    scroll-behavior: smooth;
+}
+
+.phoneinput {
+    @apply w-[198px] CCCL:w-[248px] CDLX:w-[368px];
+}
+
+.react-international-phone-country-selector-button {
+    background: rgb(255 255 255 / 0.2) !important;
+    height: 56px !important;
+    border: none !important;
+    margin-right: 8px !important;
+    border-radius: 8px !important;
+}
