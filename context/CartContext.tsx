@@ -8,9 +8,6 @@ import {
     useState,
 } from "react";
 
-// hooks
-import { useLocalStorage } from "@/hooks/useLocalStorage";
-
 interface CartContextProviderProps {
     children: ReactNode;
 }
@@ -36,15 +33,11 @@ export const useCart = () => {
     return useContext(CartContext);
 };
 
-const CartContextProvider = ({ children }: CartContextProviderProps) => {
-    const [cartItems, setCartItems] = useLocalStorage<CartItem[]>("cart", []);
+const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
 
-    useEffect(() => {
-        const data = localStorage.getItem("cart");
-        if (data) {
-            setCartItems(JSON.parse(data));
-        }
-    }, []);
+const CartContextProvider = ({ children }: CartContextProviderProps) => {
+    const [cartItems, setCartItems] =
+        useState<CartItem[]>(cartFromLocalStorage);
 
     useEffect(() => {
         localStorage.setItem("cart", JSON.stringify(cartItems));

@@ -45,11 +45,22 @@ export default function SideBar() {
                 </div>
                 {cartItems.length > 0 ? (
                     <>
-                        <div className="flex flex-col items-center justify-center relative gap-8 DCCLX:flex-row DCCLX:flex-wrap mt-12 px-1">
+                        <div className="flex flex-col items-center justify-center relative gap-8 DCCLX:flex-row DCCLX:flex-wrap mt-12 mb-20 px-1">
                             {cartItems.map((item) => (
                                 <CartCard key={item.id} {...item} />
                             ))}
                         </div>
+                        {sideBarActive && (
+                            <div className="fixed left-4 bottom-8">
+                                <Button
+                                    onClick={clearCart}
+                                    padding="12px 40px"
+                                    href="#!"
+                                >
+                                    Clear all
+                                </Button>
+                            </div>
+                        )}
                     </>
                 ) : (
                     <h1 className="font-bold text-3xl absolute left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%] text-center CDLX:text-4xl">

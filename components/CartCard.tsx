@@ -39,12 +39,12 @@ export default function CartCard({ id, quantity }: CartCardProps) {
                 <p className="font-medium">
                     {loadMore ? item.desc : item.desc.substring(0, 40)}
                     <br />
-                    <span
+                    <button
                         onClick={() => setLoadMore(!loadMore)}
                         className="text-main font-medium"
                     >
                         {loadMore ? "Show less" : "Read more"}
-                    </span>
+                    </button>
                 </p>
                 <span className="font-bold text-xl mb-2">
                     ${item.price * quantity}
