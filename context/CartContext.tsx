@@ -34,12 +34,21 @@ export const useCart = () => {
 };
 
 if (localStorage !== undefined) {
-    var cartFromLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
 }
 
 const CartContextProvider = ({ children }: CartContextProviderProps) => {
-    const [cartItems, setCartItems] =
-        useState<CartItem[]>(cartFromLocalStorage);
+    useEffect(() => {
+        if (typeof window !== "undefined" && window.localStorage) {
+            var cartFromLocalStorage = JSON.parse(
+                localStorage.getItem("cart") || "[]"
+            );
+            if (cartFromLocalStorage) {
+                setCartItems(cartFromLocalStorage);
+            }
+        }
+    }, []);
+
+    const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
     useEffect(() => {
         localStorage.setItem("cart", JSON.stringify(cartItems));
