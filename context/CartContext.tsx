@@ -33,10 +33,9 @@ export const useCart = () => {
     return useContext(CartContext);
 };
 
-if (localStorage !== undefined) {
-}
-
 const CartContextProvider = ({ children }: CartContextProviderProps) => {
+    const [cartItems, setCartItems] = useState<CartItem[]>([]);
+
     useEffect(() => {
         if (typeof window !== "undefined" && window.localStorage) {
             var cartFromLocalStorage = JSON.parse(
@@ -47,8 +46,6 @@ const CartContextProvider = ({ children }: CartContextProviderProps) => {
             }
         }
     }, []);
-
-    const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
     useEffect(() => {
         localStorage.setItem("cart", JSON.stringify(cartItems));
