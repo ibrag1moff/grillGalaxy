@@ -33,10 +33,13 @@ export const useCart = () => {
     return useContext(CartContext);
 };
 
+if (localStorage) {
+    var cartFromLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
+}
+
 const CartContextProvider = ({ children }: CartContextProviderProps) => {
-    const [cartItems, setCartItems] = useState<CartItem[]>(
-        JSON.parse(localStorage.getItem("cart") || "[]")
-    );
+    const [cartItems, setCartItems] =
+        useState<CartItem[]>(cartFromLocalStorage);
 
     useEffect(() => {
         localStorage.setItem("cart", JSON.stringify(cartItems));
